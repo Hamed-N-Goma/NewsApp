@@ -1,33 +1,30 @@
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:itmc323/presentation_layer/modules/newsDetails/newsDetails.dart';
+import 'package:itmc323/presentation_layer/modules/newsdetails_En/newsDetailsEn.dart';
 
 import '../../../busniss_logic_layer/cubit/news_cubit.dart';
 
-class sportsScreen extends StatelessWidget {
-  const sportsScreen({Key? key}) : super(key: key);
+class BbcNews extends StatelessWidget {
+  const BbcNews({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<NewsCubit, NewsState>(
       listener: (context, state) {},
       builder: (context, state) {
-        var list = NewsCubit.get(context).sports;
-        return Directionality(
-          textDirection: TextDirection.rtl,
-          child: ConditionalBuilder(
-              condition: list.isNotEmpty,
-              builder: (context) => ListView.separated(
-                  itemBuilder: (context, index) =>
-                      newsitems(list[index], context),
-                  separatorBuilder: (context, index) => const SizedBox(
-                        height: 20,
-                      ),
-                  itemCount: list.length),
-              fallback: (context) =>
-                  const Center(child: CircularProgressIndicator())),
-        );
+        var list = NewsCubit.get(context).BBCNews;
+        return ConditionalBuilder(
+            condition: list.isNotEmpty,
+            builder: (context) => ListView.separated(
+                itemBuilder: (context, index) =>
+                    newsitems(list[index], context),
+                separatorBuilder: (context, index) => const SizedBox(
+                      height: 20,
+                    ),
+                itemCount: list.length),
+            fallback: (context) =>
+                const Center(child: CircularProgressIndicator()));
       },
     );
   }
@@ -35,7 +32,7 @@ class sportsScreen extends StatelessWidget {
   Widget newsitems(newsitem, context) => InkWell(
         onTap: () {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => NewsDetails(newsitem)));
+              MaterialPageRoute(builder: (context) => NewsDetailsEn(newsitem)));
         },
         child: Padding(
           padding: const EdgeInsets.all(10),
@@ -74,9 +71,10 @@ class sportsScreen extends StatelessWidget {
                                 child: Text(
                                   "${newsitem['title']}",
                                   style: const TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500),
-                                  maxLines: 2,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  maxLines: 4,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               )

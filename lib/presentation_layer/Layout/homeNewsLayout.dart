@@ -1,37 +1,96 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:itmc323/busniss_logic_layer/cubit/news_cubit.dart';
-import 'package:itmc323/presentation_layer/modules/drawer/drawer.dart';
+import 'package:itmc323/data_layer/remote/dio.dart';
+import 'package:itmc323/presentation_layer/modules/bbcNews/bbcNews.dart';
+import 'package:itmc323/presentation_layer/modules/headlines/headlines.dart';
+import 'package:itmc323/presentation_layer/modules/newsLy_screen/newsLy.dart';
+import 'package:itmc323/presentation_layer/modules/settings/settings.dart';
+import 'package:itmc323/presentation_layer/modules/sports/sportsScreen.dart';
 
-class HomeNewsLayout extends StatelessWidget {
+class HomeNewsLayout extends StatefulWidget {
   const HomeNewsLayout({Key? key}) : super(key: key);
+
+  @override
+  State<HomeNewsLayout> createState() => _HomeNewsLayoutState();
+}
+
+class _HomeNewsLayoutState extends State<HomeNewsLayout>
+    with SingleTickerProviderStateMixin {
+  TabController? tabcontroller;
+
+  @override
+  void initState() {
+    tabcontroller = TabController(length: 4, vsync: this);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => NewsCubit(),
+      create: (BuildContext context) => NewsCubit()..getAllData(),
       child: BlocConsumer<NewsCubit, NewsState>(
         listener: ((context, state) {}),
         builder: (context, state) {
           var Cubit = NewsCubit.get(context);
           return Scaffold(
             appBar: AppBar(
-                title: const Text(
-                  "ITMC323 News",
-                ),
-                centerTitle: true,
-                actions: [
-                  IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.search_outlined))
-                ]),
-            drawer: MyDrawer(),
-            bottomNavigationBar: BottomNavigationBar(
+              title: const Text(
+                "News Hero",
+              ),
+              centerTitle: true,
+              actions: [
+                IconButton(
+                    onPressed: () {}, icon: const Icon(Icons.search_outlined)),
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) => SettingsScreen())));
+                    },
+                    icon: const Icon(Icons.settings))
+              ],
+              bottom: TabBar(
+                isScrollable: true,
+                onTap: (value) {
+                  Cubit.changeTabBar(value);
+                },
+                tabs: Cubit.tabslist,
+                controller: tabcontroller,
+              ),
+            ),
+
+            floatingActionButton: FloatingActionButton(
+                child: Icon(Icons.add),
+                onPressed: () {
+                  MyDio.gitData(pathUrl: "/v2/top-headlines", queryParameters: {
+                    'sources': 'bbc-news',
+                    'apiKey': 'e47e1b72c32f4e7e99184ee243155253'
+                  }).then((value) {
+                    print(value.data.toString());
+                  }).catchError((error) {
+                    print(error.toString());
+                  });
+                }),
+            // drawer: MyDrawer(),
+            /*      bottomNavigationBar: BottomNavigationBar(
               currentIndex: Cubit.navBarIndex,
               onTap: (value) {
-                Cubit.ChangeBottomNaveBar(value);
+                Cubit.ChangeBottomNaveBar(value, context);
               },
               items: Cubit.buttomNaveBarItems,
+            ),*/
+            body: TabBarView(
+              controller: tabcontroller,
+              children: [
+                NewsLy(),
+                HeadLines(),
+                sportsScreen(),
+                BbcNews(),
+              ],
             ),
-            body: Cubit.screens[Cubit.navBarIndex],
+            //Cubit.screens[Cubit.navBarIndex],
           );
         },
       ),

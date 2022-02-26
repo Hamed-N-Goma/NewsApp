@@ -27,14 +27,15 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  bloc: ^8.0.2
+  conditional_builder_null_safety: ^0.0.6
   cupertino_icons: ^1.0.2
+  dio: ^4.0.4
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
-  dio: ^4.0.4
-  bloc: ^8.0.2
-
-
+  flutter_localizations: # Add this line
+    sdk: flutter         # Add this line
 
 dev_dependencies:
   flutter_lints: ^1.0.0
@@ -51,7 +52,7 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  #assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -63,10 +64,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts: 
+     - family: junnah
+       fonts:
+         - asset: assets/fonts/Janna.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
