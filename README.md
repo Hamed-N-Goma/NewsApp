@@ -1,7 +1,6 @@
 # itmc323
 
-A new Flutter project.
-
+A News App project  for itmc323 
 ## Getting Started
 
 This project is a starting point for a Flutter application.
