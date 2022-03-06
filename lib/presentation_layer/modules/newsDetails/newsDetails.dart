@@ -57,7 +57,7 @@ class _NewsDetailsState extends State<NewsDetails> {
                                 topLeft: Radius.circular(30),
                                 topRight: Radius.circular(30))),
                         width: width,
-                        height: height * 0.6,
+                        height: height * 0.9,
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(10, 30, 10, 0.8),
                           child: Column(

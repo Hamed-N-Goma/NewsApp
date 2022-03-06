@@ -1,55 +1,11 @@
-import 'package:bloc/bloc.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:itmc323/data_layer/remote/dio.dart';
-import 'package:itmc323/presentation_layer/modules/bbcNews/bbcNews.dart';
-import 'package:itmc323/presentation_layer/modules/settings/settings.dart';
-import 'package:itmc323/presentation_layer/modules/sports/sportsScreen.dart';
-import 'package:meta/meta.dart';
 import 'package:flutter/material.dart';
-import '../../presentation_layer/Layout/homeNewsLayout.dart';
-
 part 'news_state.dart';
 
 class NewsCubit extends Cubit<NewsState> {
   NewsCubit() : super(NewsInitial());
   static NewsCubit get(context) => BlocProvider.of(context);
-
-  //int navBarIndex = 0;
-
-  /* List<Widget> screens = [
-    // ignore: prefer_const_constructors
-    SettingsScreen(),
-    HomeNewsLayout()
-  ];
-*/
-  // i remove this buttom nev bar because bad for Ux
-
-  /*List<BottomNavigationBarItem> buttomNaveBarItems = [
-    const BottomNavigationBarItem(
-        label: "Home",
-        icon: Icon(
-          Icons.home,
-        )),
-    const BottomNavigationBarItem(
-        label: "Setting",
-        icon: Icon(
-          Icons.settings,
-        )),
-  ];*/
-
-  /*void ChangeBottomNaveBar(int Index, context) {
-    navBarIndex = Index;
-    if (navBarIndex == 1) {
-      //make the index to zero because when save settings or pop navigation back to home and don't stuck on settings
-      navBarIndex = 0;
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => Setting()));
-      emit(ChangeBottomNavigationBarStates());
-    } else {
-      emit(ChangeBottomNavigationBarStates());
-    }
-  }*/
 
   //tab bar items
 
@@ -145,7 +101,7 @@ class NewsCubit extends Cubit<NewsState> {
   List<dynamic> headlines = [];
   void getheadlineNews() {
     emit(LodingNews());
-    if (sports.isEmpty) {
+    if (headlines.isEmpty) {
       MyDio.gitData(pathUrl: "/v2/top-headlines", queryParameters: {
         'language': 'ar',
         'apiKey': 'e47e1b72c32f4e7e99184ee243155253'
@@ -170,11 +126,11 @@ class NewsCubit extends Cubit<NewsState> {
 //searching
   List<dynamic> search = [];
 
-  void SearchigKey(String Searching) {
+  void searchigKey(String searching) {
     emit(LodingNews());
-    if (Lynews.isEmpty) {
+    if (search.isEmpty) {
       MyDio.gitData(pathUrl: "v2/everything", queryParameters: {
-        'q': Searching,
+        'q': searching,
         'apiKey': 'e47e1b72c32f4e7e99184ee243155253'
       }).then((value) {
         search = value.data['articles'];
@@ -188,6 +144,6 @@ class NewsCubit extends Cubit<NewsState> {
   }
 
   void serchword(String searchword) {
-    SearchigKey(searchword);
+    searchigKey(searchword);
   }
 }

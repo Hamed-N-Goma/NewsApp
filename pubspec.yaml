@@ -30,6 +30,7 @@ dependencies:
   bloc: ^8.0.2
   conditional_builder_null_safety: ^0.0.6
   cupertino_icons: ^1.0.2
+  switcher_button: ^0.0.4
   dio: ^4.0.4
   flutter:
     sdk: flutter

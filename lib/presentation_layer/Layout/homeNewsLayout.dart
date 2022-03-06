@@ -5,8 +5,9 @@ import 'package:itmc323/data_layer/remote/dio.dart';
 import 'package:itmc323/presentation_layer/modules/bbcNews/bbcNews.dart';
 import 'package:itmc323/presentation_layer/modules/headlines/headlines.dart';
 import 'package:itmc323/presentation_layer/modules/newsLy_screen/newsLy.dart';
-import 'package:itmc323/presentation_layer/modules/settings/settings.dart';
 import 'package:itmc323/presentation_layer/modules/sports/sportsScreen.dart';
+
+import '../modules/searchscreen/searchscreen.dart';
 
 class HomeNewsLayout extends StatefulWidget {
   const HomeNewsLayout({Key? key}) : super(key: key);
@@ -27,73 +28,51 @@ class _HomeNewsLayoutState extends State<HomeNewsLayout>
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => NewsCubit()..getAllData(),
-      child: BlocConsumer<NewsCubit, NewsState>(
-        listener: ((context, state) {}),
-        builder: (context, state) {
-          var Cubit = NewsCubit.get(context);
-          return Scaffold(
-            appBar: AppBar(
-              title: const Text(
-                "News Hero",
-              ),
-              centerTitle: true,
-              actions: [
-                IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.search_outlined)),
-                IconButton(
+    return BlocConsumer<NewsCubit, NewsState>(
+      listener: ((context, state) {}),
+      builder: (context, state) {
+        var Cubit = NewsCubit.get(context);
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text(
+              "News Hero",
+            ),
+            centerTitle: true,
+            actions: [
+              Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: IconButton(
                     onPressed: () {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: ((context) => SettingsScreen())));
+                              builder: ((context) => SrearchScreen())));
                     },
-                    icon: const Icon(Icons.settings))
-              ],
-              bottom: TabBar(
-                isScrollable: true,
-                onTap: (value) {
-                  Cubit.changeTabBar(value);
-                },
-                tabs: Cubit.tabslist,
-                controller: tabcontroller,
+                    icon: const Icon(Icons.search_outlined)),
               ),
-            ),
-
-            floatingActionButton: FloatingActionButton(
-                child: Icon(Icons.add),
-                onPressed: () {
-                  MyDio.gitData(pathUrl: "/v2/top-headlines", queryParameters: {
-                    'sources': 'bbc-news',
-                    'apiKey': 'e47e1b72c32f4e7e99184ee243155253'
-                  }).then((value) {
-                    print(value.data.toString());
-                  }).catchError((error) {
-                    print(error.toString());
-                  });
-                }),
-            // drawer: MyDrawer(),
-            /*      bottomNavigationBar: BottomNavigationBar(
-              currentIndex: Cubit.navBarIndex,
+            ],
+            bottom: TabBar(
+              isScrollable: true,
               onTap: (value) {
-                Cubit.ChangeBottomNaveBar(value, context);
+                Cubit.changeTabBar(value);
               },
-              items: Cubit.buttomNaveBarItems,
-            ),*/
-            body: TabBarView(
+              tabs: Cubit.tabslist,
               controller: tabcontroller,
-              children: [
-                NewsLy(),
-                HeadLines(),
-                sportsScreen(),
-                BbcNews(),
-              ],
             ),
-            //Cubit.screens[Cubit.navBarIndex],
-          );
-        },
-      ),
+          ),
+
+          body: TabBarView(
+            controller: tabcontroller,
+            children: [
+              NewsLy(),
+              HeadLines(),
+              sportsScreen(),
+              BbcNews(),
+            ],
+          ),
+          //Cubit.screens[Cubit.navBarIndex],
+        );
+      },
     );
   }
 }

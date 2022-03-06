@@ -18,7 +18,7 @@ class _NewsDetailsState extends State<NewsDetailsEn> {
     width = MediaQuery.of(context).size.width;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
           onPressed: () {
             print(newsitem);
           }),
@@ -42,45 +42,43 @@ class _NewsDetailsState extends State<NewsDetailsEn> {
               ),
               Positioned(
                 top: height * 0.3,
-                child: SingleChildScrollView(
-                  child: Material(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30)),
-                    child: Container(
-                      clipBehavior: Clip.none,
-                      decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30))),
-                      width: width,
-                      height: height * 0.6,
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 30, 10, 0.8),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                "${newsitem['title']}",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
+                child: Material(
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: const Radius.circular(30)),
+                  child: Container(
+                    clipBehavior: Clip.none,
+                    decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30))),
+                    width: width,
+                    height: height * 0.9,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(10, 30, 10, 0.8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              "${newsitem['title']}",
+                              style: const TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(
-                              height: 10,
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(10.0),
+                            child: Text(
+                              '${newsitem['description']}',
+                              style: const TextStyle(fontSize: 18),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(10.0),
-                              child: Text(
-                                '${newsitem['description']}',
-                                style: TextStyle(fontSize: 18),
-                              ),
-                            )
-                          ],
-                        ),
+                          )
+                        ],
                       ),
                     ),
                   ),
