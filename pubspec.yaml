@@ -30,14 +30,13 @@ dependencies:
   bloc: ^8.0.2
   conditional_builder_null_safety: ^0.0.6
   cupertino_icons: ^1.0.2
-  switcher_button: ^0.0.4
   dio: ^4.0.4
   flutter:
     sdk: flutter
   flutter_bloc: ^8.0.1
-  flutter_localizations: # Add this line
-    sdk: flutter         # Add this line
-
+  flutter_localizations:
+    sdk: flutter
+  flutter_offline: ^2.1.0
 dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test:
@@ -53,8 +52,8 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
-  #assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+     - assets/images/noConnection.png
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -65,10 +64,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts: 
-     - family: junnah
-       fonts:
-         - asset: assets/fonts/Janna.ttf
+  fonts:
+    - family: junnah
+      fonts:
+        - asset: assets/fonts/Janna.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
