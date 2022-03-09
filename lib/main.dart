@@ -1,3 +1,4 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,29 +20,31 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (BuildContext context) => NewsCubit()..getAllData(),
-      child: MaterialApp(
-          theme: ThemeData(
-            fontFamily: 'junnah',
-            tabBarTheme: TabBarTheme(labelColor: Colors.black),
-            primarySwatch: Colors.deepPurple,
-            scaffoldBackgroundColor: Colors.white,
-            appBarTheme: const AppBarTheme(
-                iconTheme: IconThemeData(color: Colors.black),
-                backgroundColor: Colors.white,
-                elevation: 0,
-                titleTextStyle: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold),
-                systemOverlayStyle: SystemUiOverlayStyle(
-                  statusBarColor: Colors.white,
-                  statusBarIconBrightness: Brightness.dark,
-                )),
-          ),
-          themeMode: ThemeMode.light,
-          debugShowCheckedModeBanner: false,
-          home: const HomeNewsLayout()),
-    );
-  }
+        create: (BuildContext context) => NewsCubit()..getAllData(),
+        child: MaterialApp(
+            theme: ThemeData(
+              fontFamily: 'junnah',
+              tabBarTheme: const TabBarTheme(labelColor: Colors.black),
+              primarySwatch: Colors.deepPurple,
+              scaffoldBackgroundColor: Colors.white,
+              appBarTheme: const AppBarTheme(
+                  iconTheme: IconThemeData(color: Colors.black),
+                  backgroundColor: Colors.white,
+                  elevation: 0,
+                  titleTextStyle: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold),
+                  systemOverlayStyle: SystemUiOverlayStyle(
+                    statusBarColor: Colors.white,
+                    statusBarIconBrightness: Brightness.dark,
+                  )),
+            ),
+            themeMode: ThemeMode.light,
+            
+            
+  }home:animetionflashbulder;
+  diirtion::
+  background
+
 }
